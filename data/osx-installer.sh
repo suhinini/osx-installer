@@ -91,6 +91,17 @@ fi
 
 if [ ! -f ~/.zshrc ]; then
     curl -L http://install.ohmyz.sh | sh
+
+    ZSH_THEME_URL=http://suhinini.github.io/osx-installer/data/suhinini.zsh-theme
+    ZSH_THEME_NAME=osx-installer
+
+    wget -q $ZSH_THEME_URL -O ~/.oh-my-zsh/themes/$ZSH_THEME_NAME.zsh-theme
+
+    sed -i.bak "s/^ZSH_THEME=.*$/ZSH_THEME=\"$ZSH_THEME_NAME\"/" ~/.zshrc
+    sed -i.bak "s/^.*CASE_SENSITIVE=.*/CASE_SENSITIVE=false/" ~/.zshrc
+    sed -i.bak "s/^plugins=.*/plugins=(git brew subl vagrant)/" ~/.zshrc
+
+    rm .zshrc.bak
 else 
     echo "zsh already installed"
 fi
