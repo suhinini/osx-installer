@@ -119,6 +119,7 @@ if [ ! -f ~/.zshrc ]; then
     # run z tool
     sed -i.bak "/^.*\/z\.sh.*$/d" ~/.zshrc
     echo ". `brew --prefix`/etc/profile.d/z.sh" >> ~/.zshrc
+    echo "" > ~/.z
 
     rm .zshrc.bak
 else 
