@@ -31,6 +31,12 @@ else
     brew install tree
 fi
 
+if brew list -1 | grep -q "^z\$"; then
+    echo "brew/z already installed"
+else
+    brew install z
+fi
+
 # cask goodies
 
 if brew cask list -1 | grep -q "^google-chrome\$"; then
@@ -109,6 +115,10 @@ if [ ! -f ~/.zshrc ]; then
     sed -i.bak "s/^ZSH_THEME=.*$/ZSH_THEME=\"$ZSH_THEME_NAME\"/" ~/.zshrc
     sed -i.bak "s/^.*CASE_SENSITIVE=.*/CASE_SENSITIVE=false/" ~/.zshrc
     sed -i.bak "s/^plugins=.*/plugins=(git brew subl vagrant)/" ~/.zshrc
+
+    # run z tool
+    sed -i.bak "/^.*\/z\.sh.*$/d" ~/.zshrc
+    echo ". `brew --prefix`/etc/profile.d/z.sh" >> ~/.zshrc
 
     rm .zshrc.bak
 else 
