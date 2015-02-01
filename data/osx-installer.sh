@@ -25,10 +25,19 @@ else
     brew install wget
 fi
 
+if brew list -1 | grep -q "^tree\$"; then
+    echo "brew/tree already installed"
+else
+    brew install tree
+fi
+
 # cask goodies
 
 if brew cask list -1 | grep -q "^google-chrome\$"; then
     echo "cask/google-chrome already installed"
+
+    # Removing stupid 2-finger back navigation
+    defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
 else
     brew cask install google-chrome
 fi
