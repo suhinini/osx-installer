@@ -5,7 +5,7 @@
 # installing brew
 
 if ! hash brew 2>/dev/null; then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     brew doctor
 else
     echo "brew already installed"
@@ -37,6 +37,12 @@ else
     brew install z
 fi
 
+if brew list -1 | grep -q "^pyenv\$"; then
+    echo "brew/pyenv already installed"
+else
+    brew install pyenv
+fi
+
 # cask goodies
 
 if brew cask list -1 | grep -q "^google-chrome\$"; then
@@ -48,29 +54,11 @@ else
     brew cask install google-chrome
 fi
 
-if brew cask list -1 | grep -q "^sublime-text$"; then
-    echo "cask/sublime-text already installed"
+if brew cask list -1 | grep -q "^visual-studio-code$"; then
+    echo "cask/visual-studio-code already installed"
 else
-    brew cask install sublime-text
+    brew cask install visual-studio-code
 fi
-
-if brew cask list -1 | grep -q "^viber$"; then
-    echo "cask/viber already installed"
-else
-    brew cask install viber
-fi 
-
-if brew cask list -1 | grep -q "^skype$"; then
-    echo "cask/skype already installed"
-else
-    brew cask install skype
-fi 
-
-if brew cask list -1 | grep -q "^evernote$"; then
-    echo "cask/evernote already installed"
-else
-    brew cask install evernote
-fi 
 
 if brew cask list -1 | grep -q "^iterm2$"; then
     echo "cask/iterm2 already installed"
@@ -78,22 +66,16 @@ else
     brew cask install iterm2
 fi 
 
-if brew cask list -1 | grep -q "^vlc$"; then
-    echo "cask/vlc already installed"
+if brew cask list -1 | grep -q "^clipy$"; then
+    echo "cask/clipy already installed"
 else
-    brew cask install vlc
+    brew cask install clipy
 fi 
 
-if brew cask list -1 | grep -q "^dropbox$"; then
-    echo "cask/dropbox already installed"
+if brew cask list -1 | grep -q "^mtmr$"; then
+    echo "cask/mtmr already installed"
 else
-    brew cask install dropbox
-fi 
-
-if brew cask list -1 | grep -q "^clipmenu$"; then
-    echo "cask/clipmenu already installed"
-else
-    brew cask install clipmenu
+    brew cask install mtmr
 fi 
 
 if brew cask list -1 | grep -q "^slack$"; then
@@ -101,6 +83,12 @@ if brew cask list -1 | grep -q "^slack$"; then
 else
     brew cask install slack
 fi 
+
+if brew cask list -1 | grep -q "^telegram$"; then
+    echo "cask/telegram already installed"
+else
+    brew cask install telegram
+fi
 
 # zsh
 
@@ -114,7 +102,7 @@ if [ ! -f ~/.zshrc ]; then
 
     sed -i.bak "s/^ZSH_THEME=.*$/ZSH_THEME=\"$ZSH_THEME_NAME\"/" ~/.zshrc
     sed -i.bak "s/^.*CASE_SENSITIVE=.*/CASE_SENSITIVE=false/" ~/.zshrc
-    sed -i.bak "s/^plugins=.*/plugins=(git brew subl vagrant)/" ~/.zshrc
+    sed -i.bak "s/^plugins=.*/plugins=(git brew)/" ~/.zshrc
 
     # run z tool
     sed -i.bak "/^.*\/z\.sh.*$/d" ~/.zshrc
