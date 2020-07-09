@@ -132,3 +132,10 @@ defaults write com.apple.dock springboard-hide-duration -int 0
 killall Dock
 
 echo "launchpad configured"
+
+# Keyboard goodies
+
+defaults write -g InitialKeyRepeat -int 12
+defaults write -g KeyRepeat -int 2
+
+echo "keyboard configured"
